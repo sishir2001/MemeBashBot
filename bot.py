@@ -1,12 +1,10 @@
 #bot.py
 
-from asyncio import events
 import os
 import random
 import discord
 from discord.message import Message
 from dotenv import load_dotenv
-from dotenv.main import with_warn_for_invalid_lines
 # dotenv library for parsing .env files 
 
 # loads the environment variables from .env file into shell environment variable 
