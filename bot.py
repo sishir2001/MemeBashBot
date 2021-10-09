@@ -116,7 +116,7 @@ intents.members = True
 # client - an object that represents the connection to discord 
 # ! client = discord.Client(intents = intents)
 # convering all clients to bot
-bot = commands.Bot(command_prefix='$',intents=intents)
+bot = commands.Bot(command_prefix='!',intents=intents)
 
 # an event handler , which handles the event when connected to discord
 @bot.event
@@ -171,7 +171,7 @@ async def on_message(message):
     await bot.process_commands(message)
 
 # commands for the bot 
-@bot.command(name='get_dialogues_telugu')
+@bot.command(name='get.dialog.telugu',help="gives you random telugu movie dialogues")
 async def getDialoguesTelugu(ctx):
     # ? @param ctx : context - contains the information of channel and guild from where the command came from 
     randomDialogue = f"{ctx.author.mention} be like : " + random.choice(movieDialoguesTelugu)
@@ -179,19 +179,41 @@ async def getDialoguesTelugu(ctx):
     await ctx.send(randomDialogue)
     
 
-@bot.command(name='get_dialogues_english')
+@bot.command(name='get.dialog.english',help="gives you random english movie dialogues")
 async def getDialoguesTelugu(ctx):
     # ? @param ctx : context - contains the information of channel and guild from where the command came from 
     randomDialogue = f"{ctx.author.mention} be like : " + random.choice(movieDialoguesEnglish)
     print(f"A Telugu dialogue replied to {ctx.author} ")
     await ctx.send(randomDialogue)
     
-@bot.command(name='get_dialogues_hindi')
+@bot.command(name='get.dialog.hindi',help="gives you random hindi movie dialogues")
 async def getDialoguesTelugu(ctx):
     # ? @param ctx : context - contains the information of channel and guild from where the command came from 
     randomDialogue = f"{ctx.author.mention} be like : " + random.choice(movieDialoguesHindi)
     print(f"A Telugu dialogue replied to {ctx.author} ")
     await ctx.send(randomDialogue)
+
+@bot.command()
+async def test(ctx,*args):
+    # * here args variable is a tuple . variable no of arguments 
+    await ctx.send(f"{len(args)} arguments : {','.join(args)} , server: {ctx.guild}")
+
+# ! command for creating a new channel 
+# only with admin roles can create a channel 
+@bot.command(name="create_text_channel",help="Creates a new channel . Arg : nameOfTheChannel")
+@commands.has_role('admin')
+async def createTextChannel(ctx,channelName="None"):
+    if(channelName == "None"):
+        await ctx.send(f"{ctx.author.mention} , You need to specify the text-channel name ! !create_text_channel <Channel Name>")
+    guild = ctx.guild
+    # !checking whether the given channel exists 
+    existing_channel = discord.utils.get(guild.channels,name=channelName)
+    if not existing_channel:
+        # create a new channel
+        print(f"Creating a text channel : {channelName}")
+        await guild.create_text_channel(channelName)
+    else : 
+        await ctx.send("{ctx.author.mention} , A text channel with these name already exists!")
 
 # handling exceptions 
 @bot.event
@@ -199,6 +221,12 @@ async def on_error(event,*args,**kwargs):
     with open('err_log','a') as f:
         print("error occured")
         f.write(f"Unhandled Error : {args[0]} \n ")
+
+# handling command errors
+@bot.event
+async def on_command_error(ctx,error):
+    if isinstance(error,commands.errors.CheckFailure):
+        ctx.send(f"{ctx.author.mention} , You dont have the correct role for this !")
 
 #run the client 
 bot.run(TOKEN) 
