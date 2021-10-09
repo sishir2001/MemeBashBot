@@ -47,16 +47,6 @@ async def on_member_join(member):
 async def on_message(message):
     if(message.author == bot.user):
         return
-    # ! need to be placed in bot commands 
-    # elif message.content == "bot_get_dialogues_english":
-    #     randomDialogue = f"{message.author} be like : " + random.choice(movieDialoguesEnglish)
-    #     await message.channel.send(randomDialogue)
-    #     print(f"A English dialogue replied to {message.author.name} ")
-
-    # elif message.content == "bot_get_dialogues_hindi":
-    #     randomDialogue = f"{message.author} be like : " + random.choice(movieDialoguesHindi)
-    #     await message.channel.send(randomDialogue)
-    #     print(f"A Hindi dialogue replied to {message.author.name} ")
 
     if message.content.lower() in cussWords:
         await message.channel.send(f'Well {message.author.mention}, you need to control your tongue .And you that {message.content} 🤣')
