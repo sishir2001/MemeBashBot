@@ -5,106 +5,13 @@ import random
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
+# from local files 
+from movieDialoguesEnglish import movieDialoguesEnglish
+from movieDialoguesTelugu import movieDialoguesTelugu
+from movieDialoguesHindi import movieDialoguesHindi
+from cussWords import cussWords
 # dotenv library for parsing .env files 
-# ! random movie dialogues 
-movieDialoguesTelugu = ["I like the way you breathe preethi ...",
-"Common preethi dont do this to me !",
-"I curse you to marry a tulu guy !",
-"Veera Shankar Reddy… Mokke Kada Ani Peekeste Peeka Kostaa",
-"Tappu Naa Vaipu Undi Kabatti Tala Dinchukuni Veltunna, Ledante Talalu Teesukellevaadni ",
-"Chudu Oka Vaipe Chudu Inko Vaipu Chudalanukoku Tattukolevu",
-"Naa Saavu Nenu Sasta Neekenduku",
-"Atiga Aashapade Magavaadu… Atiga Aavashapade Aadadi Sukhapadinatlu Charitralo Ledu",
-"Sar Sarle Enno Anukuntam… Anni Avutaya Enti",
-"Okka Saari Commit Ayite Naa Maata Nene Vinanu",
-"Evadu Kodite Dimma Tirigi Mind Block Ayipoddo Aade Pandu Gaadu ",
-"Commissioner Kooturani Chepte Bhayapadipotama… Commissioner Kooturlani Preminchakudada… Commissioner Kooturlaki Mogudlu Raara",
-"City Ki Entho Mandi Commissioner Lu Vastuntaru Pothuntaru.. Chanti Gaadu Eppudu Ikkade Untadu Local",
-"Eppudochamani Kaadannayya Bullet Diginda Leda",
-"Naa Peru Daya… Naku Lenide Adi",
-"Iddaru Kottukunte Yuddham… Ade Okadu Meedadipothe Dandayaatra Idi Daya Gaadi Dandayaatra",
-"Neeku Ego Lopale Untademo Naku Naa Chuttu Wifi La Untadi",
-"Ooru Maarite Tine Food Maaruddi Padukune Bed Maaruddi Blood Enduku Maaruddi Ra Bloody Fool",
-"Flute Jinka Mundu Oodu Simham Mundu Kaadu",
-"Seat Kaadu Kada Assembly Gate Kuda Daatanivvanu",
-"Any Centre Single Hand Ganesh",
-"Mass Tho Pettukunte Madatha Madathadipoddi ",
-"Tagore… Tongue Teguddi ",
-"Na Daari Rahadari.. Better Don’t Come In My way ",
-"Yuddham Chetakaanode Dharmam Gurinchi Maatladatadu Sir",
-]
 
-movieDialoguesEnglish = [
-"Frankly, my dear, I don't give a damn.",
-"Bond ... James Bond",
-"Baba Yaga .. He is man of utmost concerntration .",
-"I'm going to make him an offer he can't refuse",
-"My name is Fish Mooney, bitch!",
-"Do you have any idea who you're talking to?",
-"Friends don't lie.",
-"I am the danger.",
-"... then maybe your best course would be to tread lightly.",
-"I am the one who knocks.",
-"When you play the Game of Thrones, you win or you die.",
-"If you want justice, you've come to the wrong place.",
-"Valar Morghulis.",
-"I demand a trial by combat!",
-"Who wants to be king?",
-"Winter is coming.",
-"The Lannisters send their regards.",
-"By order of the peaky blinders...",
-"You know nothing Jon Snow.",
-"Fear cuts deeper than swords.",
-"Everything before the word ‘but’ is horseshit.",
-"A lion doesn’t concern himself with the opinions of a sheep.",
-"The man who passes the sentence should swing the sword.",
-"Any man who must say ‘I am the king’ is no true king.",
-"A ruler who kills those devoted to her is not a ruler who inspires devotion.",
-"Never forget what you are. The rest of the world will not. Wear it like armour, and it can never be used to hurt you.",
-"A Lannister always pays his debts.",
-"Nothing f***s you harder than time.",
-"All men must die, but we are not men",
-"The night is dark and full of terrors",
-"Dreams didnt make us kings , dragons did .... You motherfuckers!"
-]
-movieDialoguesHindi = [
-"Our Bussiness is our Bussiness , its none of your bussiness",
-"Rishtey mein toh hum tumhare baap lagte hai, naam hai Shahenshaah!",
-"How’s the josh?",
-"Madarchoood , Tu vahi rukh mei ah raha hoon !!",
-"Saala , shanthi se chodh bhi nehi dete !",
-"Mata ji yahan hai, Behen yahan hai, Maa-Behen ek karne mein aasani hogi.",
-"Attack me bhi gun, defense me bhi gun, Hum banayenge Mirzapur ko Amrica!",
-"Neta banna hai toh Gundey paalo. Gundey mat bano.",
-"Darr ki yahi dikkat hai, ki kabhi bhi Khatam ho sakta hai.",
-"Suru majboori mein kiye the….. Ab maza aa raha hai.",
-"Izzat nahi karte hain… Darte hain sab.",
-"Chutiya hain tumhara ladka. ..... Chutiya hain woh important nahi hai. Hamara ladka hai, Woh important hai.",
-"Agli baar Munna Bhaiya ghar aaye… Zinda wapas hi nahi laute toh?",
-"Oh Bhosidi waley Chacha. Rest kariye, varna Rest in Peace ho jaoge!",
-"Middle class aadmi, aadmi nahi chutiya hota hai. Chutiya.",
-]
-
-cussWords = [
-"fuck",
-"fucking",
-"bitch",
-"asshole",
-"tits",
-"bastard",
-"Vagina",
-"gudda",
-"bollocks",
-"puka",
-"pooka",
-"yedava",
-"lanje",
-"lanja",
-"kodaka",
-"fuckers",
-"motherfuckers",
-"motherfucker"
-]
 
 # loads the environment variables from .env file into shell environment variable 
 load_dotenv()
