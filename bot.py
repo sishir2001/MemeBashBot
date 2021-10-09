@@ -196,6 +196,7 @@ async def getDialoguesTelugu(ctx):
 @bot.command()
 async def test(ctx,*args):
     # * here args variable is a tuple . variable no of arguments 
+    print(f"Members in server : {ctx.guild} are {ctx.guild.members}")
     await ctx.send(f"{len(args)} arguments : {','.join(args)} , server: {ctx.guild}")
 
 # ! command for creating a new channel 
@@ -226,7 +227,7 @@ async def on_error(event,*args,**kwargs):
 @bot.event
 async def on_command_error(ctx,error):
     if isinstance(error,commands.errors.CheckFailure):
-        ctx.send(f"{ctx.author.mention} , You dont have the correct role for this !")
+        await ctx.send(f"{ctx.author.mention} , You dont have the correct role for this !")
 
 #run the client 
 bot.run(TOKEN) 
