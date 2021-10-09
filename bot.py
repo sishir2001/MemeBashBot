@@ -117,23 +117,23 @@ async def createTextChannel(ctx,channelName="None"):
     else : 
         await ctx.send(f"{ctx.author.mention} , A text channel with these name already exists!")
 
+# ! test : Saving and Sending images 
 #bot commands for saving an uploaded image 
-@bot.command()
-async def save(ctx):
+@bot.command(name = "upload_image",help="Upload Your selfie to generate an amazing meme! ")
+async def saveUploadedImage(ctx):
     try:
-        url = ctx.message.attachments[0].url #url of the image uploaded in a channel 
+        # saving the image 
+        imageName = str(uuid.uuid4()) + '.jpg'
+        # folderPath = 'uploadedPics/'
+        await ctx.message.attachments[0].save(imageName)
+        print(f"Saved uploaded Image successfuly : {imageName}")
+        await ctx.send(f"{ctx.author.mention},Image saved successfully !")
+        # sending an image back 
+        await ctx.send("Here is your meme !",file = discord.File(imageName))
+        print(f"Sent a image : {imageName} to the channel !")
     except IndexError :
         print("No attachments of images")
         await ctx.send(f"{ctx.author.mention}, there is no image uploaded !")
-    else : 
-        if url[0:26] == "https://cdn.discordapp.com":
-            # then we can think this as a valid url and download the image using requests api 
-            r = requests(url,stream=True)
-            imageName = str(uuid.uuid4()) + '.jpg'
-            # saving the image 
-            with(open(imageName,'wb') as out_file):
-                print(f"Saving the image : {imageName}")
-                shutil.copyfile(r.raw,out_file)
 
 
 # handling exceptions 
