@@ -5,11 +5,15 @@ import random
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
+# for saving the image 
+import requests
+import uuid # for unique naming of the image 
+import shutil
 # from local files 
-from movieDialoguesEnglish import movieDialoguesEnglish
-from movieDialoguesTelugu import movieDialoguesTelugu
-from movieDialoguesHindi import movieDialoguesHindi
-from cussWords import cussWords
+from dialogFiles.movieDialoguesEnglish import movieDialoguesEnglish
+from dialogFiles.movieDialoguesTelugu import movieDialoguesTelugu
+from dialogFiles.movieDialoguesHindi import movieDialoguesHindi
+from dialogFiles.cussWords import cussWords
 # dotenv library for parsing .env files 
 
 
@@ -38,7 +42,7 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    await member.send(f"Welcome to Our Server {member.name.mention}, Sukhibhawa 🤙🏻!!")
+    await member.send(f"Welcome to Our Server {member.name.mention} 🤙🏻!!")
     print(f"A new member {member.name} joined !")
 
 
@@ -111,7 +115,26 @@ async def createTextChannel(ctx,channelName="None"):
         print(f"Creating a text channel : {channelName}")
         await guild.create_text_channel(channelName)
     else : 
-        await ctx.send("{ctx.author.mention} , A text channel with these name already exists!")
+        await ctx.send(f"{ctx.author.mention} , A text channel with these name already exists!")
+
+#bot commands for saving an uploaded image 
+@bot.command()
+async def save(ctx):
+    try:
+        url = ctx.message.attachments[0].url #url of the image uploaded in a channel 
+    except IndexError :
+        print("No attachments of images")
+        await ctx.send(f"{ctx.author.mention}, there is no image uploaded !")
+    else : 
+        if url[0:26] == "https://cdn.discordapp.com":
+            # then we can think this as a valid url and download the image using requests api 
+            r = requests(url,stream=True)
+            imageName = str(uuid.uuid4()) + '.jpg'
+            # saving the image 
+            with(open(imageName,'wb') as out_file):
+                print(f"Saving the image : {imageName}")
+                shutil.copyfile(r.raw,out_file)
+
 
 # handling exceptions 
 @bot.event
